@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MMViewController.h
 //  MasterMind
 //
 //  Created by Guillem Fernández González on 30/09/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MMViewController : UIViewController
 
 @end
-
