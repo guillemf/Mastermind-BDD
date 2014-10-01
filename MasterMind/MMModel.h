@@ -11,7 +11,10 @@
 @interface MMModel : NSObject
 
 @property (nonatomic, strong) NSString *combination;
+@property (nonatomic, readonly) NSUInteger attempts;
+@property (nonatomic, strong) NSArray *history;
 
 - (void)start;
+- (NSString *)addAttempt:(NSString *)combination;
 
 @end
