@@ -10,9 +10,11 @@
 		8A19580F19DAEEB300978CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19580E19DAEEB300978CD8 /* main.m */; };
 		8A19581219DAEEB300978CD8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19581119DAEEB300978CD8 /* AppDelegate.m */; };
 		8A19581A19DAEEB300978CD8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A19581919DAEEB300978CD8 /* Images.xcassets */; };
-		8A19582919DAEEB300978CD8 /* MasterMindTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19582819DAEEB300978CD8 /* MasterMindTests.m */; };
 		8A19583419DAEF2000978CD8 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583319DAEF2000978CD8 /* MMViewController.m */; };
 		8A19583519DAEF2000978CD8 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583319DAEF2000978CD8 /* MMViewController.m */; };
+		8A19583719DB244300978CD8 /* ModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583619DB244300978CD8 /* ModelTest.m */; };
+		8A19583A19DB27FF00978CD8 /* MMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583919DB27FF00978CD8 /* MMModel.m */; };
+		8A19583B19DB27FF00978CD8 /* MMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583919DB27FF00978CD8 /* MMModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +36,11 @@
 		8A19581919DAEEB300978CD8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A19582219DAEEB300978CD8 /* MasterMindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterMindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A19582719DAEEB300978CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A19582819DAEEB300978CD8 /* MasterMindTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterMindTests.m; sourceTree = "<group>"; };
 		8A19583219DAEF2000978CD8 /* MMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMViewController.h; sourceTree = "<group>"; };
 		8A19583319DAEF2000978CD8 /* MMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
+		8A19583619DB244300978CD8 /* ModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTest.m; sourceTree = "<group>"; };
+		8A19583819DB27FF00978CD8 /* MMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMModel.h; sourceTree = "<group>"; };
+		8A19583919DB27FF00978CD8 /* MMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				8A19581119DAEEB300978CD8 /* AppDelegate.m */,
 				8A19583219DAEF2000978CD8 /* MMViewController.h */,
 				8A19583319DAEF2000978CD8 /* MMViewController.m */,
+				8A19583819DB27FF00978CD8 /* MMModel.h */,
+				8A19583919DB27FF00978CD8 /* MMModel.m */,
 				8A19581919DAEEB300978CD8 /* Images.xcassets */,
 				8A19580C19DAEEB300978CD8 /* Supporting Files */,
 			);
@@ -100,8 +106,8 @@
 		8A19582519DAEEB300978CD8 /* MasterMindTests */ = {
 			isa = PBXGroup;
 			children = (
-				8A19582819DAEEB300978CD8 /* MasterMindTests.m */,
 				8A19582619DAEEB300978CD8 /* Supporting Files */,
+				8A19583619DB244300978CD8 /* ModelTest.m */,
 			);
 			path = MasterMindTests;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 				8A19581219DAEEB300978CD8 /* AppDelegate.m in Sources */,
 				8A19583419DAEF2000978CD8 /* MMViewController.m in Sources */,
 				8A19580F19DAEEB300978CD8 /* main.m in Sources */,
+				8A19583A19DB27FF00978CD8 /* MMModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A19583519DAEF2000978CD8 /* MMViewController.m in Sources */,
-				8A19582919DAEEB300978CD8 /* MasterMindTests.m in Sources */,
+				8A19583B19DB27FF00978CD8 /* MMModel.m in Sources */,
+				8A19583719DB244300978CD8 /* ModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
