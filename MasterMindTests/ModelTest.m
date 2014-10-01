@@ -72,9 +72,17 @@
 {
     NSCharacterSet* nonNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     NSRange r = [model.combination rangeOfCharacterFromSet: nonNumbers];
-    [model start];
     
     XCTAssertEqual(r.location, NSNotFound, @"All digits should be numeric");
+}
+
+- (void)testModelSecretCombinationAllDigitsAreBetween1and4
+{
+    NSCharacterSet* non1234 = [[NSCharacterSet characterSetWithCharactersInString:@"1234"] invertedSet];
+    NSRange r = [model.combination rangeOfCharacterFromSet: non1234];
+    
+    XCTAssertEqual(r.location, NSNotFound, @"All digits should be between 1 and 4");
+
 }
 
 @end

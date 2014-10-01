@@ -25,8 +25,15 @@
 
 - (void)start {
     
-    int randomNumber = arc4random() % 9000 + 1000;
-    self.combination = [NSString stringWithFormat:@"%d", randomNumber];
+    int rndDigit;
+    NSMutableString *newCombination = [NSMutableString stringWithString:@""];
+    
+    do {
+        rndDigit = 1 + arc4random() % (4 - 1);
+        [newCombination appendFormat:@"%d", rndDigit];
+    } while (newCombination.length < 4);
+    
+    self.combination = [newCombination copy];
 }
 
 @end
