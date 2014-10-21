@@ -18,6 +18,11 @@
 		8A3CF95D19F582CF000AAE35 /* CellViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF95C19F582CF000AAE35 /* CellViewTest.m */; };
 		8A3CF96319F5837C000AAE35 /* MMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF96219F5837C000AAE35 /* MMCell.m */; };
 		8A3CF96419F5837C000AAE35 /* MMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF96219F5837C000AAE35 /* MMCell.m */; };
+		8AE79D2319F6754E00DD57CA /* testImageRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2219F6754E00DD57CA /* testImageRed.png */; };
+		8AE79D2519F693C700DD57CA /* testImageGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2419F693C700DD57CA /* testImageGreen.png */; };
+		8AE79D2719F6941C00DD57CA /* testImageBlue100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2619F6941C00DD57CA /* testImageBlue100x100.png */; };
+		8AE79D2919F694FD00DD57CA /* testImageBlue200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2819F694FD00DD57CA /* testImageBlue200x200.png */; };
+		BF2AB35BBBA54418B60ED794 /* libPods-MasterMindTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E8879A3D684DB2BC0E1A67 /* libPods-MasterMindTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +52,13 @@
 		8A3CF95C19F582CF000AAE35 /* CellViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellViewTest.m; sourceTree = "<group>"; };
 		8A3CF96119F5837C000AAE35 /* MMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCell.h; sourceTree = "<group>"; };
 		8A3CF96219F5837C000AAE35 /* MMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCell.m; sourceTree = "<group>"; };
+		8AE79D2219F6754E00DD57CA /* testImageRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageRed.png; sourceTree = "<group>"; };
+		8AE79D2419F693C700DD57CA /* testImageGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageGreen.png; sourceTree = "<group>"; };
+		8AE79D2619F6941C00DD57CA /* testImageBlue100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageBlue100x100.png; sourceTree = "<group>"; };
+		8AE79D2819F694FD00DD57CA /* testImageBlue200x200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageBlue200x200.png; sourceTree = "<group>"; };
+		9E1A1C34DD753621B434379B /* Pods-MasterMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterMindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterMindTests/Pods-MasterMindTests.release.xcconfig"; sourceTree = "<group>"; };
+		A3E8879A3D684DB2BC0E1A67 /* libPods-MasterMindTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MasterMindTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFD014AD91FAD926A092A2EB /* Pods-MasterMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterMindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterMindTests/Pods-MasterMindTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,18 +73,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2AB35BBBA54418B60ED794 /* libPods-MasterMindTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C3AEE0F01B37B3A504DB5BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFD014AD91FAD926A092A2EB /* Pods-MasterMindTests.debug.xcconfig */,
+				9E1A1C34DD753621B434379B /* Pods-MasterMindTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		51EDBBE5211042DB91BE6C02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3E8879A3D684DB2BC0E1A67 /* libPods-MasterMindTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8A19580019DAEEB300978CD8 = {
 			isa = PBXGroup;
 			children = (
 				8A19580B19DAEEB300978CD8 /* MasterMind */,
 				8A19582519DAEEB300978CD8 /* MasterMindTests */,
 				8A19580A19DAEEB300978CD8 /* Products */,
+				51EDBBE5211042DB91BE6C02 /* Frameworks */,
+				3C3AEE0F01B37B3A504DB5BC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +153,10 @@
 		8A19582619DAEEB300978CD8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8AE79D2619F6941C00DD57CA /* testImageBlue100x100.png */,
+				8AE79D2819F694FD00DD57CA /* testImageBlue200x200.png */,
+				8AE79D2419F693C700DD57CA /* testImageGreen.png */,
+				8AE79D2219F6754E00DD57CA /* testImageRed.png */,
 				8A19582719DAEEB300978CD8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -177,9 +213,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A19582F19DAEEB300978CD8 /* Build configuration list for PBXNativeTarget "MasterMindTests" */;
 			buildPhases = (
+				EC14F6F1D6F74D8FB13DA2B5 /* Check Pods Manifest.lock */,
 				8A19581E19DAEEB300978CD8 /* Sources */,
 				8A19581F19DAEEB300978CD8 /* Frameworks */,
 				8A19582019DAEEB300978CD8 /* Resources */,
+				F56529CE199D4FBBBC7A38D0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,10 +279,47 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AE79D2319F6754E00DD57CA /* testImageRed.png in Resources */,
+				8AE79D2719F6941C00DD57CA /* testImageBlue100x100.png in Resources */,
+				8AE79D2919F694FD00DD57CA /* testImageBlue200x200.png in Resources */,
+				8AE79D2519F693C700DD57CA /* testImageGreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC14F6F1D6F74D8FB13DA2B5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F56529CE199D4FBBBC7A38D0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MasterMindTests/Pods-MasterMindTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A19580519DAEEB300978CD8 /* Sources */ = {
@@ -380,6 +455,7 @@
 		};
 		8A19583019DAEEB300978CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFD014AD91FAD926A092A2EB /* Pods-MasterMindTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -399,6 +475,7 @@
 		};
 		8A19583119DAEEB300978CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E1A1C34DD753621B434379B /* Pods-MasterMindTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

@@ -36,6 +36,7 @@
     [super setFrame:frame];
     
     self.bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    [self setNeedsDisplay];
 }
 
 - (void)setColor:(UIColor *)color
@@ -43,14 +44,14 @@
     if (_color != color) {
         _color = color;
         self.accessibilityLabel = [color description];
+        [self setNeedsDisplay];
     }
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
+    [self.color setFill];
+    [self.bezierPath fill];
 }
-*/
+
 
 @end
