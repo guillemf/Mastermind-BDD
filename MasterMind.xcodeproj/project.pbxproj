@@ -15,6 +15,9 @@
 		8A19583719DB244300978CD8 /* ModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583619DB244300978CD8 /* ModelTest.m */; };
 		8A19583A19DB27FF00978CD8 /* MMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583919DB27FF00978CD8 /* MMModel.m */; };
 		8A19583B19DB27FF00978CD8 /* MMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583919DB27FF00978CD8 /* MMModel.m */; };
+		8A3CF95D19F582CF000AAE35 /* CellViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF95C19F582CF000AAE35 /* CellViewTest.m */; };
+		8A3CF96319F5837C000AAE35 /* MMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF96219F5837C000AAE35 /* MMCell.m */; };
+		8A3CF96419F5837C000AAE35 /* MMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CF96219F5837C000AAE35 /* MMCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,9 @@
 		8A19583619DB244300978CD8 /* ModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTest.m; sourceTree = "<group>"; };
 		8A19583819DB27FF00978CD8 /* MMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMModel.h; sourceTree = "<group>"; };
 		8A19583919DB27FF00978CD8 /* MMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMModel.m; sourceTree = "<group>"; };
+		8A3CF95C19F582CF000AAE35 /* CellViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellViewTest.m; sourceTree = "<group>"; };
+		8A3CF96119F5837C000AAE35 /* MMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCell.h; sourceTree = "<group>"; };
+		8A3CF96219F5837C000AAE35 /* MMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +90,9 @@
 			children = (
 				8A19581019DAEEB300978CD8 /* AppDelegate.h */,
 				8A19581119DAEEB300978CD8 /* AppDelegate.m */,
-				8A19583219DAEF2000978CD8 /* MMViewController.h */,
-				8A19583319DAEF2000978CD8 /* MMViewController.m */,
-				8A19583819DB27FF00978CD8 /* MMModel.h */,
-				8A19583919DB27FF00978CD8 /* MMModel.m */,
+				8A3CF95E19F58311000AAE35 /* Model */,
+				8A3CF95F19F58321000AAE35 /* View */,
+				8A3CF96019F5832F000AAE35 /* Controller */,
 				8A19581919DAEEB300978CD8 /* Images.xcassets */,
 				8A19580C19DAEEB300978CD8 /* Supporting Files */,
 			);
@@ -108,6 +113,7 @@
 			children = (
 				8A19582619DAEEB300978CD8 /* Supporting Files */,
 				8A19583619DB244300978CD8 /* ModelTest.m */,
+				8A3CF95C19F582CF000AAE35 /* CellViewTest.m */,
 			);
 			path = MasterMindTests;
 			sourceTree = "<group>";
@@ -118,6 +124,33 @@
 				8A19582719DAEEB300978CD8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8A3CF95E19F58311000AAE35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A19583819DB27FF00978CD8 /* MMModel.h */,
+				8A19583919DB27FF00978CD8 /* MMModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8A3CF95F19F58321000AAE35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A3CF96119F5837C000AAE35 /* MMCell.h */,
+				8A3CF96219F5837C000AAE35 /* MMCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8A3CF96019F5832F000AAE35 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A19583219DAEF2000978CD8 /* MMViewController.h */,
+				8A19583319DAEF2000978CD8 /* MMViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +254,7 @@
 				8A19581219DAEEB300978CD8 /* AppDelegate.m in Sources */,
 				8A19583419DAEF2000978CD8 /* MMViewController.m in Sources */,
 				8A19580F19DAEEB300978CD8 /* main.m in Sources */,
+				8A3CF96319F5837C000AAE35 /* MMCell.m in Sources */,
 				8A19583A19DB27FF00978CD8 /* MMModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3CF95D19F582CF000AAE35 /* CellViewTest.m in Sources */,
 				8A19583519DAEF2000978CD8 /* MMViewController.m in Sources */,
 				8A19583B19DB27FF00978CD8 /* MMModel.m in Sources */,
+				8A3CF96419F5837C000AAE35 /* MMCell.m in Sources */,
 				8A19583719DB244300978CD8 /* ModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +431,7 @@
 				8A19582E19DAEEB300978CD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A19582F19DAEEB300978CD8 /* Build configuration list for PBXNativeTarget "MasterMindTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +440,7 @@
 				8A19583119DAEEB300978CD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
