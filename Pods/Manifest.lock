@@ -1,10 +1,13 @@
 PODS:
+  - NSLogger (1.5)
   - OCMock (3.1.1)
 
 DEPENDENCIES:
+  - NSLogger (~> 1.5)
   - OCMock (~> 3.1.1)
 
 SPEC CHECKSUMS:
+  NSLogger: 84ed0bf00985df483153ce344d8171c9ec83be2b
   OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854
 
 COCOAPODS: 0.34.4

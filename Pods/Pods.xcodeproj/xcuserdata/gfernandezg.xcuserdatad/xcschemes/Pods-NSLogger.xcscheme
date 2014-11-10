@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EFE53B16D737053407290992"
-               BuildableName = "libPods-MasterMindTests-OCMock.a"
-               BlueprintName = "Pods-MasterMindTests-OCMock"
+               BlueprintIdentifier = "B139367E205357FF8BEEFCE8"
+               BuildableName = "libPods-NSLogger.a"
+               BlueprintName = "Pods-NSLogger"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
