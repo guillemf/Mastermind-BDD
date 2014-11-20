@@ -115,7 +115,7 @@
     
     NSMutableString *resultString = [NSMutableString stringWithString:@""];
     
-    for (int n=0; n<length; n++)
+    for (int n=1; n<length; n++)
         [resultString appendString:symbol];
     
     return [resultString copy];
@@ -124,7 +124,11 @@
 
 - (NSString *)generateRandomResult
 {
-    NSMutableString *resultString = [[self generateRandomCharString] mutableCopy];
+    NSMutableString *resultString;
+    do {
+        resultString = [[self generateRandomCharString] mutableCopy];
+    } while (resultString.length == 0);
+    
     return [[resultString stringByAppendingString:[self generateRandomCharString]] copy];
 }
 
@@ -153,7 +157,9 @@
 {
     NSArray *currentBeziers = resultCell.bezierPaths;
     resultCell.result = [self generateRandomResult];
-    
+    // Force draw rect
+    [resultCell drawRect:resultCell.bounds];
+
     XCTAssertNotEqual(currentBeziers, resultCell.bezierPaths, @"Bezier Path list should be updated");
 }
 
@@ -165,7 +171,8 @@
 - (void)testOnResultChangeBezierPathsContainsSameNumberOfCirclesAsTheLengthOfResultWithOneSymbol
 {
     resultCell.result = [self generateRandomCharString];
-    
+    [resultCell drawRect:resultCell.bounds];
+
     XCTAssertEqual(resultCell.bezierPaths.count, resultCell.result.length);
     
 }
@@ -173,7 +180,8 @@
 - (void)testOnResultChangeBezierPathsContainsSameNumberOfCirclesAsTheLengthOfResult
 {
     resultCell.result = [self generateRandomResult];
-    
+    [resultCell drawRect:resultCell.bounds];
+
     XCTAssertEqual(resultCell.bezierPaths.count, resultCell.result.length);
     
 }
@@ -194,7 +202,7 @@
     
     resultCell.result = newResult;
     
-    XCTAssertEqualObjects(resultCell.result, resultLeftSide);
+    XCTAssertEqualObjects(resultCell.result, resultLeftSide, @"%@ should produce %@ but produced %@", newResult, resultLeftSide, resultCell.result);
     
 }
 

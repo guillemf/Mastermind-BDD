@@ -52,7 +52,7 @@
         
         _result = [result substringWithRange:NSMakeRange(0, stringLenth)];
         
-        [self generateBezierPaths];
+        [self setNeedsDisplay];
     }
 }
 
@@ -60,44 +60,50 @@
 {
     [super setFrame:frame];
     
-    [self generateBezierPaths];
+    if (_result) {
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)setColor:(UIColor *)color
 {
     if (_color != color) {
         _color = color;
-        [self generateBezierPaths];
+        [self setNeedsDisplay];
     }
 }
 
 - (void)drawRect:(CGRect)rect {
 
-    [self.color setStroke];
-    [self.color setFill];
-
-    unichar leftchar = [self.result characterAtIndex:0];
-    NSString *combination = [self.result stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    int currentElement = 0;
-    
-    for (UIBezierPath *path in self.bezierPaths) {
-        if ([combination characterAtIndex:currentElement] == leftchar) {
-            [path fill];
-        } else {
-            [path stroke];
+    if (self.result.length > 0) {
+        [self.color setStroke];
+        [self.color setFill];
+        
+        unichar leftchar = [self.result characterAtIndex:0];
+        NSString *combination = [self.result stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        int currentElement = 0;
+        
+        self.bezierPaths = [self generateBezierPaths];
+        
+        for (UIBezierPath *path in self.bezierPaths) {
+            if ([combination characterAtIndex:currentElement] == leftchar) {
+                [path fill];
+            } else {
+                [path stroke];
+            }
+            currentElement++;
         }
-        currentElement++;
     }
     
 }
 
 #pragma mark - Private methods
 
-- (void)generateBezierPaths
+- (NSArray *)generateBezierPaths
 {
     if (self.bounds.size.height<=0 || self.bounds.size.width<=0) {
-        [self generateEmptyBeziers];
+        return [self generateEmptyBeziers];
     } else {
         // Obtain first char
         NSString *combination = [self.result stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -132,13 +138,12 @@
             }
         }
         
-        self.bezierPaths = [tmpBeziers copy];
+        return [tmpBeziers copy];
     }
     
-    [self setNeedsDisplay];
 }
 
-- (void)generateEmptyBeziers
+- (NSArray *)generateEmptyBeziers
 {
     NSMutableArray *tmpBeziers = [[NSMutableArray alloc] initWithCapacity:_result.length];
     
@@ -146,7 +151,7 @@
         [tmpBeziers addObject:[[UIBezierPath alloc] init]];
     }
     
-    self.bezierPaths = [tmpBeziers copy];
+    return [tmpBeziers copy];
 
 }
 @end

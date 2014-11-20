@@ -62,17 +62,6 @@
     XCTAssertEqual(cell.backgroundColor, [UIColor clearColor]);
 }
 
-- (void)testWhenSizeChangesPathSizeChanges
-{
-    int width = arc4random_uniform(200);
-    int height = arc4random_uniform(200);
-    cell.frame = CGRectMake(0, 0, width, height);
-    UIBezierPath *expectedBezier = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, width, height)];
-
-    XCTAssertTrue(CGPathEqualToPath([expectedBezier CGPath], [cell.bezierPath CGPath]),
-                  @"Bezier Path does not match expeted shape");
-}
-
 - (void)testCellOnInitColorIsTransparent {
     
     XCTAssertEqual(cell.color, [UIColor clearColor]);
@@ -115,13 +104,13 @@
 
 - (void)testBezierPathIsCalledWhenDrawRectIsCalled {
 
-    id cellMock = OCMPartialMock(cell);
+    id bezierClassMock = OCMClassMock([UIBezierPath class]);
     
-    OCMStub([cellMock bezierPath]).andForwardToRealObject;
+    OCMStub([bezierClassMock bezierPathWithOvalInRect:cell.bounds]).andForwardToRealObject;
     
     [cell drawRect:cell.bounds];
     
-    OCMVerify([cellMock bezierPath]);
+    OCMVerify([bezierClassMock bezierPathWithOvalInRect:cell.bounds]);
 }
 
 - (void)testFillIsCalledOnBezierPathWhenDrawRectIsCalled

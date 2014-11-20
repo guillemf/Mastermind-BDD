@@ -35,7 +35,6 @@
 {
     [super setFrame:frame];
     
-    self.bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     [self setNeedsDisplay];
 }
 
@@ -50,6 +49,9 @@
 
 - (void)drawRect:(CGRect)rect {
     [self.color setFill];
+    
+    [self.bezierPath removeAllPoints];
+    [self.bezierPath appendPath:[UIBezierPath bezierPathWithOvalInRect:self.bounds]];
     [self.bezierPath fill];
 }
 
