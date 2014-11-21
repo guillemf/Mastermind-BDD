@@ -1,19 +1,25 @@
 @randomColumn = 0;
 @randomRow = 0;
 
-Given /^I am on the Initial Screen$/ do
-  # The screen should contain nine rows and five columns
-  rows = query("view {accessibilityLabel BEGINSWITH 'Combination Row'}")
-  fail("The screen should contain nine rows") if rows.count != 9
-  
-  # Following the mock, those rows have to be as wide as the screen
+When(/^I have (\d+) rows in the screen$/) do |total|
+  rows = query("MMCombinationRow")
+  fail("The screen should contain #{total} rows but found #{rows.count} instead") if rows.count != total.to_i
+end
+
+When /^All rows are screen wide$/ do
+  rows = query("MMCombinationRow")
+
   window = query("window")
   rows.each do |row|
     if row["frame"]["width"] != window.first["frame"]["width"]
        fail("All rows have to be as wide as the screen") 
     end
   end
-  # Following the mock, the rows have distributed along the screen  
+end
+
+When /^All rows are distributed along the screen$/ do
+  rows = query("MMCombinationRow")
+  
   lastFloor = 0
   rows.each do |row|
     if row["frame"]["y"] != lastFloor
@@ -22,17 +28,22 @@ Given /^I am on the Initial Screen$/ do
     fail("All rows should be higher than zero") if row["frame"]["height"] == 0
     lastFloor = row["frame"]["y"] + row["frame"]["height"]
   end
+end
+
+Given /^I am on the Initial Screen$/ do
+  # The screen should contain nine rows and five columns all being combinations
+  macro "I have 9 rows in the screen"
   
-  # All rows are combination
-  rows.each do |row|
-    fail("All rows must be combination rows but #{row["class"]} was found") if row["class"] != "MMCombinationRow"
-  end
+  # Following the mock, those rows have to be as wide as the screen
+  macro "All rows are screen wide"
   
-  sleep(STEP_PAUSE)
+  # Following the mock, the rows have distributed along the screen  
+  macro "All rows are distributed along the screen"
+  
 end
 
 Then(/^a new game should be ready$/) do
-  rows = query("view {accessibilityLabel BEGINSWITH 'Combination Row'}")
+  rows = query("MMCombinationRow")
 
   rows.each do |row|
     

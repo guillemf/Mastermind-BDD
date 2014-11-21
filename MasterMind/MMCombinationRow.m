@@ -34,25 +34,30 @@
                                                                        views:@{@"view": result}]];
 
         UIView *first = result;
+        UIView *previous = first;
         MMCell *cell;
         for (int n=0; n<4; n++) {
             cell = [[MMCell alloc] init];
 
             cell.translatesAutoresizingMaskIntoConstraints = NO;
             cell.contentMode = UIViewContentModeRedraw;
+            cell.isAccessibilityElement = YES;
             cell.accessibilityLabel = [NSString stringWithFormat:@"Cell %d:", n];
+            NSLog(@"%@", cell.accessibilityLabel);
+            
             cell.userInteractionEnabled = YES;
             
             [self addSubview:cell];
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==previous)]"
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previous][view(==first)]"
                                                                          options:0
                                                                          metrics:nil
-                                                                           views:@{@"previous": first, @"view": cell}]];
+                                                                           views:@{@"first": first, @"previous": previous, @"view": cell}]];
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
                                                                          options:0
                                                                          metrics:nil
                                                                            views:@{@"view": cell}]];
             
+            previous = cell;
             UITapGestureRecognizer *colorTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
             [cell addGestureRecognizer:colorTap];
 

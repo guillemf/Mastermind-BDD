@@ -72,14 +72,6 @@
     XCTAssertTrue([cell isAccessibilityElement], @"View accessibility should be enabled");
 }
 
-- (void)testWhenCellChangesColorAccessibilityLabelChangesText {
-    
-    UIColor *newColor = [self generateRandomColor];
-    cell.color = newColor;
-    
-    XCTAssertEqualObjects(cell.accessibilityLabel, [newColor description], @"Accessibility label should be %@", [newColor description]);
-}
-
 - (void)testWhenCellChangesColorViewIsRedrawn {
     
     id cellMock = OCMPartialMock(cell);

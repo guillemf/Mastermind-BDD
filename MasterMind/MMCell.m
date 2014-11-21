@@ -42,7 +42,6 @@
 {
     if (_color != color) {
         _color = color;
-        self.accessibilityLabel = [color description];
         [self setNeedsDisplay];
     }
 }

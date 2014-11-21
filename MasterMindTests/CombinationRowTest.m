@@ -53,13 +53,12 @@
 
 - (void)testAllCellsAreTheSameWidth
 {
-    row.frame = CGRectMake(0, 0, arc4random_uniform(300), arc4random_uniform(300));
+    float expectedWidth = arc4random_uniform(50);
+    row.frame = CGRectMake(0, 0, expectedWidth*5, arc4random_uniform(300));
     [row layoutIfNeeded];
 
-    float expectedWidth = [(UIView*)[row.subviews objectAtIndex:0] frame].size.width;
-    
     for (UIView *subview in row.subviews)
-        XCTAssertEqual(expectedWidth, subview.frame.size.width, @"All cells should be the same width");
+        XCTAssertEqual(expectedWidth, ceil(subview.frame.size.width), @"All cells should be the same width");
 }
 
 - (void)testAllCellsAreTheSameHeigthAsTheRow
