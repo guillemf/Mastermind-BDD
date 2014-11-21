@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMProtocols.h"
 
-@interface MMViewController : UIViewController
+@interface MMViewController : UIViewController<CombinationCellDelegate>
+
+- (NSString *)currentCombination;
 
 @end

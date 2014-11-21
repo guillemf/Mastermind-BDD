@@ -12,6 +12,12 @@
 
 #import "MMCell.h"
 
+@interface MMCell(test)
+
+- (void)drawShapeWithSize:(NSValue *)vsize offset:(NSNumber *)voffset;
+
+@end
+
 @interface CellViewTest : XCTestCase
 
 @end
@@ -94,26 +100,15 @@
     OCMVerify([cellMock setNeedsDisplay]);
 }
 
-- (void)testBezierPathIsCalledWhenDrawRectIsCalled {
+- (void)testDrawShapeIsCalledWhenDrawRectIsCalled {
 
-    id bezierClassMock = OCMClassMock([UIBezierPath class]);
+    id cellMock = OCMPartialMock(cell);
     
-    OCMStub([bezierClassMock bezierPathWithOvalInRect:cell.bounds]).andForwardToRealObject;
+    OCMStub([cellMock drawShapeWithSize:[OCMArg any] offset:[OCMArg any]]).andForwardToRealObject;
     
     [cell drawRect:cell.bounds];
     
-    OCMVerify([bezierClassMock bezierPathWithOvalInRect:cell.bounds]);
-}
-
-- (void)testFillIsCalledOnBezierPathWhenDrawRectIsCalled
-{
-    id bezierMock = OCMPartialMock(cell.bezierPath);
-    
-    OCMStub([bezierMock fill]).andForwardToRealObject;
-    
-    [cell drawRect:cell.bounds];
-    
-    OCMVerify([bezierMock fill]);
+    OCMVerify([cellMock drawShapeWithSize:[OCMArg any] offset:[OCMArg any]]);
 }
 
 - (void)testSetFillIsCalledOnColorWhenDrawRectIsCalled
@@ -127,35 +122,39 @@
     OCMVerify([colorMock setFill]);
 }
 
-- (void)testViewMatchesExpectedImage
-{
-
-    cell.color = [UIColor redColor];
-    cell.frame = CGRectMake(0, 0, 200, 200);
-    
-    XCTAssertEqualObjects([self dataForCellPNGRepresentation], [self dataForImageWithName:@"testImageRed"], @"View should look like the image");
-}
-
 - (void)testChangingColorGeneratesAValidView
 {
+    id cellMock = OCMPartialMock(cell);
+
+    __block int callCount = 0;
+    OCMStub([cellMock setNeedsDisplay]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
+    
     cell.color = [UIColor redColor];
-    cell.frame = CGRectMake(0, 0, 200, 200);
-    XCTAssertEqualObjects([self dataForCellPNGRepresentation], [self dataForImageWithName:@"testImageRed"], @"View should look like the image");
+    
     cell.color = [UIColor blueColor];
     
-    XCTAssertEqualObjects([self dataForCellPNGRepresentation], [self dataForImageWithName:@"testImageBlue200x200"], @"View should look like the image");
+    XCTAssert(callCount == 2);
     
 }
 
 - (void)testChangingSizeGeneratesAValidView
 {
     cell.color = [UIColor blueColor];
+
+    id cellMock = OCMPartialMock(cell);
+    
+    __block int callCount = 0;
+    OCMStub([cellMock setNeedsDisplay]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
+    
     cell.frame = CGRectMake(0, 0, 200, 200);
-    XCTAssertEqualObjects([self dataForCellPNGRepresentation], [self dataForImageWithName:@"testImageBlue200x200"], @"View should look like the image");
 
     cell.frame = CGRectMake(0, 0, 100, 100);
     
-    XCTAssertEqualObjects([self dataForCellPNGRepresentation], [self dataForImageWithName:@"testImageBlue100x100"], @"View should look like the image");
+    XCTAssert(callCount == 2);
     
 }
 

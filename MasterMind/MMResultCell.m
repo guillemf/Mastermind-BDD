@@ -10,7 +10,7 @@
 
 @interface MMResultCell()
 
-@property (nonatomic, strong) NSArray *bezierPaths;
+@property (nonatomic, assign) unichar firstChar;
 
 @end
 
@@ -21,9 +21,11 @@
     self = [super init];
     
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
         _result = @"";
         _color = [UIColor blackColor];
+        [self setIsAccessibilityElement: YES];
+        self.accessibilityLabel = @"Result";
     }
     
     return self;
@@ -37,7 +39,8 @@
         int stringLenth = 0;
         
         unichar lastChar = result.length > 0?[result characterAtIndex:0]:' ';
-
+        self.firstChar = lastChar;
+        
         for (int n=0; n<result.length; n++) {
             if (lastChar != [result characterAtIndex:n]) {
                 if (!changedSymbol) {
@@ -50,7 +53,8 @@
             stringLenth++;
         }
         
-        _result = [result substringWithRange:NSMakeRange(0, stringLenth)];
+        _result = [[result substringWithRange:NSMakeRange(0, stringLenth)] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        self.accessibilityLabel = [NSString stringWithFormat:@"Result %@", _result];
         
         [self setNeedsDisplay];
     }
@@ -75,83 +79,116 @@
 
 - (void)drawRect:(CGRect)rect {
 
-    if (self.result.length > 0) {
-        [self.color setStroke];
-        [self.color setFill];
-        
-        unichar leftchar = [self.result characterAtIndex:0];
-        NSString *combination = [self.result stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        int currentElement = 0;
-        
-        self.bezierPaths = [self generateBezierPaths];
-        
-        for (UIBezierPath *path in self.bezierPaths) {
-            if ([combination characterAtIndex:currentElement] == leftchar) {
-                [path fill];
-            } else {
-                [path stroke];
-            }
-            currentElement++;
-        }
-    }
-    
+    [self drawResultWithBallOffset:CGPointMake(3, 3)];
 }
 
 #pragma mark - Private methods
 
-- (NSArray *)generateBezierPaths
+- (void)drawBallAtContext:(CGContextRef)context withType:(NSNumber *)type atOffset:(NSValue *)voffset withSize:(NSValue *)vsize innerOffset:(NSValue *)vinnerOffset
 {
-    if (self.bounds.size.height<=0 || self.bounds.size.width<=0) {
-        return [self generateEmptyBeziers];
+    CGPoint offset      = [voffset CGPointValue];
+    CGSize  size        = [vsize CGSizeValue];
+    CGPoint innerOffset = [vinnerOffset CGPointValue];
+    
+    CGContextSaveGState(context);
+    
+    //// Outter Drawing
+    CGContextTranslateCTM(context, offset.x , offset.y);
+    
+    UIBezierPath* outterPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerOffset.x, innerOffset.y, size.width, size.height)];
+    if ([type isEqualToNumber:@0]) {
+        [self.color setFill];
+        [outterPath fill];
     } else {
-        // Obtain first char
-        NSString *combination = [self.result stringByReplacingOccurrencesOfString:@" " withString:@""];
-
-        // Obtain rectangle ration
-        float K = self.bounds.size.height/self.bounds.size.width;
-        // Obtain number of items
-        long N = combination.length;
-        
-        // Obtain grid sizes
-        float verItems = ceil(sqrtf(K*N));
-        float horItems = ceil(sqrtf(N/K));
-        
-        // Items horizontally
-        float gridHeigh = self.bounds.size.height / verItems;
-        float gridWidth = self.bounds.size.width / horItems;
-        
-        int currentElement;
-        
-        NSMutableArray *tmpBeziers = [NSMutableArray arrayWithCapacity:N];
-        UIBezierPath *tmpPath;
-
-        for (int y = 0; y<verItems; y++) {
-            for (int x = 0; x<horItems; x++) {
-                currentElement = (horItems*y)+x;
-                if (currentElement >= N) {
-                    break;
-                }
-                tmpPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(x*gridWidth, y*gridHeigh, gridWidth, gridHeigh)];
-                tmpPath.lineWidth = 1;
-                [tmpBeziers addObject:tmpPath];
-            }
-        }
-        
-        return [tmpBeziers copy];
+        [self.color setStroke];
+        outterPath.lineWidth = 1;
+        [outterPath stroke];
     }
     
+    CGContextRestoreGState(context);
+    
+    
+    //// Inner Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, offset.x + innerOffset.x, offset.y + innerOffset.y);
+    
+    UIBezierPath* innerPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerOffset.x, innerOffset.y, (size.width - 2 * innerOffset.x), (size.height - 2 * innerOffset.y))];
+    if ([type isEqualToNumber:@0]) {
+        [UIColor.whiteColor setStroke];
+        innerPath.lineWidth = 2;
+        [innerPath stroke];
+    } else {
+        [self.color setStroke];
+        innerPath.lineWidth = 2;
+        [innerPath stroke];
+    }
+    
+    CGContextRestoreGState(context);
+
 }
 
-- (NSArray *)generateEmptyBeziers
+- (void)drawResultWithBallOffset:(CGPoint)offset
 {
-    NSMutableArray *tmpBeziers = [[NSMutableArray alloc] initWithCapacity:_result.length];
+
+    //// General Declarations
+
+    //// Location calulations
+    CGSize ballSize = CGSizeMake(self.bounds.size.width / 2 - (offset.x * 2), self.bounds.size.height / 2  - (offset.y * 2));
     
-    for (int n=0; n<_result.length; n++) {
-        [tmpBeziers addObject:[[UIBezierPath alloc] init]];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //// Cell 1
+    if (self.result.length >= 1)
+    {
+        NSNumber *fC = [self.result characterAtIndex:0] == self.firstChar ? @0:@1;
+        
+        [self drawBallAtContext:context
+                       withType:fC
+                       atOffset:[NSValue valueWithCGPoint:CGPointMake(0, 0)]
+                       withSize:[NSValue valueWithCGSize:ballSize]
+                    innerOffset:[NSValue valueWithCGPoint:offset]];
+
+    }
+
+    //// Cell 2
+    if (self.result.length >= 2)
+    {
+         NSNumber *sC = [self.result characterAtIndex:1] == self.firstChar ? @0:@1;
+    
+        [self drawBallAtContext:context
+                       withType:sC
+                       atOffset:[NSValue valueWithCGPoint:CGPointMake(ballSize.width + (2 * offset.x), 0)]
+                       withSize:[NSValue valueWithCGSize:ballSize]
+                    innerOffset:[NSValue valueWithCGPoint:offset]];
+
     }
     
-    return [tmpBeziers copy];
+    
+    //// Cell 3
+    if (self.result.length >= 3)
+    {
+         NSNumber *tC = [self.result characterAtIndex:2] == self.firstChar ? @0:@1;
+        
+        [self drawBallAtContext:context
+                       withType:tC
+                       atOffset:[NSValue valueWithCGPoint:CGPointMake(0, ballSize.height + (2 * offset.y))]
+                       withSize:[NSValue valueWithCGSize:ballSize]
+                    innerOffset:[NSValue valueWithCGPoint:offset]];
+    }
+
+    //// Cell 4
+    if (self.result.length >= 4)
+    {
+         NSNumber *fC = [self.result characterAtIndex:3] == self.firstChar ? @0:@1;
+        
+        [self drawBallAtContext:context
+                       withType:fC
+                       atOffset:[NSValue valueWithCGPoint:CGPointMake(ballSize.width + (2 * offset.x), ballSize.height + (2 * offset.y))]
+                       withSize:[NSValue valueWithCGSize:ballSize]
+                    innerOffset:[NSValue valueWithCGPoint:offset]];
+    }
 
 }
+
 @end

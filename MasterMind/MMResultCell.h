@@ -11,7 +11,6 @@
 @interface MMResultCell : UIView
 
 @property (strong, nonatomic) NSString *result;
-@property (strong, readonly ) NSArray  *bezierPaths;
 @property (strong, nonatomic) UIColor  *color;
 
 @end

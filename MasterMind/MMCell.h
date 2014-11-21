@@ -10,7 +10,6 @@
 
 @interface MMCell : UIView
 
-@property (nonatomic, readonly) UIBezierPath *bezierPath;
 @property (nonatomic, strong) UIColor *color;
 
 @end

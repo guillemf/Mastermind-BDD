@@ -140,8 +140,20 @@ int combinationLength = 4;
 
 - (void)testModelMaximumNumberOfAttemptsIsNine
 {
+    NSString *combination = [self generateNonWinnerCombination];
+    NSMutableArray *combinations = [NSMutableArray arrayWithCapacity:9];
+    
     for (int n= 0; n<10; n++) {
-        [model addAttempt:@"1111"];
+
+        combination = [self generateNonWinnerCombination];
+        while ([combinations indexOfObject:combination] != NSNotFound) {
+            combination = [self generateNonWinnerCombination];
+        }
+        [combinations addObject:combination];
+    }
+    
+    for (int n= 0; n<10; n++) {
+        [model addAttempt:[combinations objectAtIndex:n]];
     }
     
     XCTAssertEqual(model.attempts, 9ul, @"The initial number of attempts has to be zero");

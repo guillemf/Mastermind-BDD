@@ -8,12 +8,6 @@
 
 #import "MMCell.h"
 
-@interface MMCell()
-
-@property (nonatomic, strong) UIBezierPath *bezierPath;
-
-@end
-
 @implementation MMCell
 
 - (id)init {
@@ -23,7 +17,6 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.color = [UIColor clearColor];
-        self.bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 0, 0)];
         [self setIsAccessibilityElement: YES];
     }
     
@@ -47,12 +40,39 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    [self.color setFill];
+
+    float offset = 5.0;
     
-    [self.bezierPath removeAllPoints];
-    [self.bezierPath appendPath:[UIBezierPath bezierPathWithOvalInRect:self.bounds]];
-    [self.bezierPath fill];
+    NSValue *shapeSize = [NSValue valueWithCGSize:CGSizeMake(self.bounds.size.width - offset*2, self.bounds.size.height - offset*2)];
+    [self drawShapeWithSize:shapeSize offset:[NSNumber numberWithFloat:offset]];
 }
 
+
+- (void)drawShapeWithSize:(NSValue *)vsize offset:(NSNumber *)voffset
+{
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGSize  size    = [vsize CGSizeValue];
+    float   offset  = [voffset floatValue];
+    
+    //// Color Declarations
+    UIColor* fill = [self.color copy];
+    CGFloat fillHSBA[4];
+    [fill getHue: &fillHSBA[0] saturation: &fillHSBA[1] brightness: &fillHSBA[2] alpha: &fillHSBA[3]];
+    
+    UIColor* stroke = [UIColor colorWithHue: fillHSBA[0] saturation: fillHSBA[1] brightness: 0.7 alpha: fillHSBA[3]];
+    
+    //// Oval Drawing
+    CGContextSaveGState(context);
+    
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(offset, offset, size.width, size.height)];
+    [fill setFill];
+    [ovalPath fill];
+    [stroke setStroke];
+    ovalPath.lineWidth = 3;
+    [ovalPath stroke];
+    
+    CGContextRestoreGState(context);
+}
 
 @end

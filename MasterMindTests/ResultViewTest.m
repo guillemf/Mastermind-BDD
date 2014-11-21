@@ -8,73 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import "NSString+Test.h"
 
 #import "MMResultCell.h"
 
-// Dummy view to draw the image we expect
+@interface MMResultCell(test)
 
-@interface DummyView : UIView
-
-@property (nonatomic, strong) NSString *combination;
-@property (nonatomic, strong) UIColor *color;
-
-@end
-
-@implementation DummyView
-
-- (id)initWithFrame:(CGRect)frame combination:(NSString *)combination color:(UIColor *)color
-{
-    self = [super initWithFrame:frame];
-    
-    if (self) {
-        self.combination = combination;
-        self.color = color;
-        self.backgroundColor = [UIColor clearColor];
-    }
-    
-    return self;
-}
-
-- (void)drawRect:(CGRect)rect {
-    // Obtain first char
-    unichar leftchar = [self.combination characterAtIndex:0];
-    NSString *combination = [self.combination stringByReplacingOccurrencesOfString:@" " withString:@""];
-    // Obtain rectangle ration
-    float K = rect.size.height/rect.size.width;
-    // Obtain number of items
-    long N = combination.length;
-    
-    // Obtain grid sizes
-    float verItems = ceil(sqrtf(K*N));
-    float horItems = ceil(sqrtf(N/K));
-    
-    // Items horizontally
-    float gridHeigh = rect.size.height / verItems;
-    float gridWidth = rect.size.width / horItems;
-    
-    // Draw circles
-    [self.color setFill];
-    [self.color setStroke];
-    
-    UIBezierPath *bezPath;
-    int currentElement;
-    
-    for (int y = 0; y<verItems; y++) {
-        for (int x = 0; x<horItems; x++) {
-            currentElement = (horItems*y)+x ;
-            if (currentElement >= N) {
-                break;
-            }
-            bezPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(x*gridWidth, y*gridHeigh, gridWidth, gridHeigh)];
-            if ([combination characterAtIndex:currentElement] == leftchar) {
-                [bezPath fill];
-            } else {
-                [bezPath stroke];
-            }
-        }
-    }
-}
-
+- (void)drawResultWithBallOffset:(CGPoint)offset;
+- (void)drawBallAtContext:(CGContextRef)context withType:(NSNumber *)type atOffset:(NSValue *)voffset withSize:(NSValue *)vsize innerOffset:(NSValue *)vinnerOffset;
 
 @end
 
@@ -111,7 +53,7 @@
     NSString *symbol = [symbols substringWithRange:NSMakeRange(symbolIndex, 1)];
     
     // Obtain random number of each symbols
-    int length = arc4random_uniform(10);
+    int length = arc4random_uniform(10)+1;
     
     NSMutableString *resultString = [NSMutableString stringWithString:@""];
     
@@ -143,6 +85,16 @@
 
 // Test Methods
 
+- (void)testSetColorCallsSetNeedsDisplay
+{
+    id mockSut = [OCMockObject partialMockForObject:resultCell];
+    
+    [mockSut setColor:[UIColor redColor]];
+    
+    OCMVerify([mockSut setNeedsDisplay]);
+    
+}
+
 - (void)testCellOnInitBackgroundIsTransparent {
     
     XCTAssertEqual(resultCell.backgroundColor, [UIColor clearColor]);
@@ -155,34 +107,54 @@
 
 - (void)testOnResultChangeBezierPathChanges
 {
-    NSArray *currentBeziers = resultCell.bezierPaths;
+    id resultMock = [OCMockObject partialMockForObject:resultCell];
     resultCell.result = [self generateRandomResult];
+
+    OCMVerify([resultMock setNeedsDisplay]);
+
     // Force draw rect
     [resultCell drawRect:resultCell.bounds];
 
-    XCTAssertNotEqual(currentBeziers, resultCell.bezierPaths, @"Bezier Path list should be updated");
+    OCMVerify([resultMock drawResultWithBallOffset:CGPointMake(3, 3)]);
 }
 
 - (void)testOnResultChangeToEmptyBezierPathsContainsZeroCircles
 {
-    XCTAssertEqual(resultCell.bezierPaths.count, 0);
-}
-
-- (void)testOnResultChangeBezierPathsContainsSameNumberOfCirclesAsTheLengthOfResultWithOneSymbol
-{
-    resultCell.result = [self generateRandomCharString];
-    [resultCell drawRect:resultCell.bounds];
-
-    XCTAssertEqual(resultCell.bezierPaths.count, resultCell.result.length);
+    id resultMock = [OCMockObject partialMockForObject:resultCell];
+    __block int callCount = 0;
+    OCMStub([resultMock drawBallAtContext:[OCMArg anyPointer]
+                                 withType:[OCMArg isKindOfClass:[NSNumber class]]
+                                 atOffset:[OCMArg isKindOfClass:[NSValue class]]
+                                 withSize:[OCMArg isKindOfClass:[NSValue class]]
+                              innerOffset:[OCMArg isKindOfClass:[NSValue class]]]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
     
+    resultCell.result = @"";
+    // Force draw rect
+    [resultCell drawRect:resultCell.bounds];
+    
+    XCTAssertEqual(callCount, 0);
 }
 
-- (void)testOnResultChangeBezierPathsContainsSameNumberOfCirclesAsTheLengthOfResult
+- (void)testOnResultChangeSameNumberOfCirclesAsTheLengthOfResultIsGenerated
 {
-    resultCell.result = [self generateRandomResult];
+    id resultMock = [OCMockObject partialMockForObject:resultCell];
+    __block int callCount = 0;
+    OCMStub([resultMock drawBallAtContext:[OCMArg anyPointer]
+                                 withType:[OCMArg isKindOfClass:[NSNumber class]]
+                                 atOffset:[OCMArg isKindOfClass:[NSValue class]]
+                                 withSize:[OCMArg isKindOfClass:[NSValue class]]
+                              innerOffset:[OCMArg isKindOfClass:[NSValue class]]]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
+
+    int len = arc4random_uniform(3)+1;
+    resultCell.result = [NSString randomStringWithLength:len];
     [resultCell drawRect:resultCell.bounds];
 
-    XCTAssertEqual(resultCell.bezierPaths.count, resultCell.result.length);
+    NSLog(@"result: %@", resultCell.result);
+    XCTAssertEqual(callCount, resultCell.result.length);
     
 }
 
@@ -191,7 +163,7 @@
     
     // Generate a random combination
     NSString *resultLeftSide = [self generateRandomResult];
-    NSString *newResult = resultLeftSide;
+    NSString *newResult = [resultLeftSide copy];
 
     // Generate a variable string with different characters
     int randomNStrings = arc4random_uniform(10) + 1;
@@ -206,63 +178,54 @@
     
 }
 
-- (void)testOnResultChangeBezierPathsContainsOnlyBezierPaths
-{
-    resultCell.result = [self generateRandomResult];
-    
-    for (id bezier in resultCell.bezierPaths) {
-        XCTAssertEqualObjects([bezier class], [UIBezierPath class], @"All objects in bezier paths have to be Bezier Paths");
-    }
-}
-
-- (void)testOnResultChangeGeneratedViewMatchesExpectedView
-{
-    resultCell.result = [self generateRandomResult];
-    resultCell.frame = CGRectMake(0, 0, arc4random_uniform(300), arc4random_uniform(300));
-    
-    DummyView *dummyV = [[DummyView alloc] initWithFrame:resultCell.frame
-                                             combination:resultCell.result
-                                                   color:resultCell.color];
-    
-    NSData *expectedImage = [self dataForCellPNGRepresentationForView:dummyV];
-
-    NSData *obtainedImage = [self dataForCellPNGRepresentationForView:resultCell];
-    
-    
-    XCTAssertEqualObjects(expectedImage, obtainedImage);
-}
-
 - (void)testIfNewResultHasOnlyOneSymbolByDefaultAreFirstSymbol
 {
+    
+    id resultMock = [OCMockObject partialMockForObject:resultCell];
+    __block int callCount = 0;
+    OCMStub([resultMock drawBallAtContext:[OCMArg anyPointer]
+                                 withType:@0
+                                 atOffset:[OCMArg isKindOfClass:[NSValue class]]
+                                 withSize:[OCMArg isKindOfClass:[NSValue class]]
+                              innerOffset:[OCMArg isKindOfClass:[NSValue class]]]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
+    
     resultCell.result = [self generateRandomCharString];
-    resultCell.frame = CGRectMake(0, 0, arc4random_uniform(300), arc4random_uniform(300));
     
-    DummyView *dummyV = [[DummyView alloc] initWithFrame:resultCell.frame
-                                             combination:resultCell.result
-                                                   color:resultCell.color];
+    // Force redraw
+    [resultCell drawRect:resultCell.bounds];
     
-    NSData *expectedImage = [self dataForCellPNGRepresentationForView:dummyV];
-    
-    NSData *obtainedImage = [self dataForCellPNGRepresentationForView:resultCell];
-    
-    
-    XCTAssertEqualObjects(expectedImage, obtainedImage);
+    if (resultCell.result.length >= 4) {
+        XCTAssertEqual(callCount, 4);
+    } else {
+        XCTAssertEqual(callCount, resultCell.result.length);
+    }
 }
 
 - (void)testIfNewResultHasASingleAsFirstSymbolAllSymbolsAreSecondary
 {
+    
+    id resultMock = [OCMockObject partialMockForObject:resultCell];
+    __block int callCount = 0;
+    OCMStub([resultMock drawBallAtContext:[OCMArg anyPointer]
+                                 withType:@1
+                                 atOffset:[OCMArg isKindOfClass:[NSValue class]]
+                                 withSize:[OCMArg isKindOfClass:[NSValue class]]
+                              innerOffset:[OCMArg isKindOfClass:[NSValue class]]]).andDo(^(NSInvocation *invocation) {
+        ++callCount;
+    }).andForwardToRealObject;
+
     resultCell.result = [NSString stringWithFormat:@" %@",[self generateRandomCharString]];
-    resultCell.frame = CGRectMake(0, 0, arc4random_uniform(300), arc4random_uniform(300));
     
-    DummyView *dummyV = [[DummyView alloc] initWithFrame:resultCell.frame
-                                             combination:resultCell.result
-                                                   color:resultCell.color];
+    // Force redraw
+    [resultCell drawRect:resultCell.bounds];
     
-    NSData *expectedImage = [self dataForCellPNGRepresentationForView:dummyV];
-    
-    NSData *obtainedImage = [self dataForCellPNGRepresentationForView:resultCell];
-        
-    XCTAssertEqualObjects(expectedImage, obtainedImage);
+    if (resultCell.result.length >= 4) {
+        XCTAssertEqual(callCount, 4);
+    } else {
+        XCTAssertEqual(callCount, resultCell.result.length);
+    }
 }
 
 

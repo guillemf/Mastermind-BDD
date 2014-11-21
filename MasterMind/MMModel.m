@@ -36,12 +36,13 @@
     NSMutableString *newCombination = [NSMutableString stringWithString:@""];
     
     do {
-        rndDigit = 1 + arc4random() % (4 - 1);
+        rndDigit = arc4random_uniform(4) + 1;//1 + arc4random() % (4 - 1);
         [newCombination appendFormat:@"%d", rndDigit];
     } while (newCombination.length < 4);
-    
+        
     self.combination = [newCombination copy];
     self.history = @[];
+    self.lastResult = @"";
     _attempts = 0;
 }
 
@@ -61,26 +62,31 @@
     
     NSMutableString *result = [@"" mutableCopy];
     NSString *testCombination = [self.combination copy];
+    NSString *checkCombination = [combination copy];
     
     if (_attempts <= 8) {
         
         // Find A's
         for (int cPos = 0; cPos<4; cPos++) {
             
-            if ([self.combination characterAtIndex:cPos] == [combination characterAtIndex:cPos]) {
+            if ([self.combination characterAtIndex:cPos] == [checkCombination characterAtIndex:cPos]) {
                 [result appendString:@"A"];
                 testCombination = [testCombination stringByReplacingCharactersInRange:NSMakeRange(cPos, 1)
                                                                            withString:@"X"];
+                checkCombination = [checkCombination stringByReplacingCharactersInRange:NSMakeRange(cPos, 1)
+                                                                           withString:@"Y"];
             }
         }
         
         // Find B's
         for (int cPos = 0; cPos<4; cPos++) {
-            r = [testCombination rangeOfString:[combination substringWithRange:NSMakeRange(cPos, 1)]];
+            r = [testCombination rangeOfString:[checkCombination substringWithRange:NSMakeRange(cPos, 1)]];
             if (r.location != NSNotFound) {
                 [result appendString:@"B"];
                 testCombination = [testCombination stringByReplacingCharactersInRange:NSMakeRange(r.location, 1)
                                                                            withString:@"X"];
+                checkCombination = [checkCombination stringByReplacingCharactersInRange:NSMakeRange(cPos, 1)
+                                                                           withString:@"Y"];
             }
         }
 

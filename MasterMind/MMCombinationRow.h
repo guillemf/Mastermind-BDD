@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMProtocols.h"
 
 @interface MMCombinationRow : UIView
+
+@property (nonatomic, weak) id<CombinationCellDelegate> delegate;
+@property (nonatomic) NSString *combination;
+
+- (void)setResult:(NSString *)result;
 
 @end

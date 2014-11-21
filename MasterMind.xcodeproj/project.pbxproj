@@ -30,6 +30,12 @@
 		8AE79D2719F6941C00DD57CA /* testImageBlue100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2619F6941C00DD57CA /* testImageBlue100x100.png */; };
 		8AE79D2919F694FD00DD57CA /* testImageBlue200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE79D2819F694FD00DD57CA /* testImageBlue200x200.png */; };
 		8ad1443e6ffed1a391d95fc0 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6874ef0d5c923a4839da4a49 /* calabash.framework */; };
+		9AA537E51A9B82C6007D9E0C /* NSString+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA537E41A9B82C6007D9E0C /* NSString+Test.m */; };
+		9AA537E81A9CA33E007D9E0C /* NSArray+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA537E71A9CA33E007D9E0C /* NSArray+Test.m */; };
+		9AB5F5831A89276400C575E1 /* ViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5F5821A89276400C575E1 /* ViewControllerTest.m */; };
+		9AFF3A4C1A9646DA00E30D54 /* GTMCodeCoverageApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF3A4B1A9646DA00E30D54 /* GTMCodeCoverageApp.m */; };
+		9AFF3A4E1A9646EB00E30D54 /* GTMCodeCoverageTestsXC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF3A4D1A9646EB00E30D54 /* GTMCodeCoverageTestsXC.m */; };
+		9AFF3A501A9663A500E30D54 /* GTMCodeCoverageApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF3A4B1A9646DA00E30D54 /* GTMCodeCoverageApp.m */; };
 		BF2AB35BBBA54418B60ED794 /* libPods-MasterMindTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E8879A3D684DB2BC0E1A67 /* libPods-MasterMindTests.a */; };
 		b4e7755249e72dcd7d9f0572 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19583319DAEF2000978CD8 /* MMViewController.m */; };
 		c100bd464e449519f845fa24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A19581919DAEEB300978CD8 /* Images.xcassets */; };
@@ -82,6 +88,15 @@
 		8AE79D2419F693C700DD57CA /* testImageGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageGreen.png; sourceTree = "<group>"; };
 		8AE79D2619F6941C00DD57CA /* testImageBlue100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageBlue100x100.png; sourceTree = "<group>"; };
 		8AE79D2819F694FD00DD57CA /* testImageBlue200x200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImageBlue200x200.png; sourceTree = "<group>"; };
+		9A2DDC9D1A8E5980003410AC /* MMProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProtocols.h; sourceTree = "<group>"; };
+		9AA537E31A9B82C6007D9E0C /* NSString+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Test.h"; sourceTree = "<group>"; };
+		9AA537E41A9B82C6007D9E0C /* NSString+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Test.m"; sourceTree = "<group>"; };
+		9AA537E61A9CA33E007D9E0C /* NSArray+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Test.h"; sourceTree = "<group>"; };
+		9AA537E71A9CA33E007D9E0C /* NSArray+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Test.m"; sourceTree = "<group>"; };
+		9AB5F5821A89276400C575E1 /* ViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTest.m; sourceTree = "<group>"; };
+		9AFF3A4A1A9646DA00E30D54 /* GTMCodeCoverageApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMCodeCoverageApp.h; sourceTree = "<group>"; };
+		9AFF3A4B1A9646DA00E30D54 /* GTMCodeCoverageApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMCodeCoverageApp.m; sourceTree = "<group>"; };
+		9AFF3A4D1A9646EB00E30D54 /* GTMCodeCoverageTestsXC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMCodeCoverageTestsXC.m; sourceTree = "<group>"; };
 		9E1A1C34DD753621B434379B /* Pods-MasterMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterMindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterMindTests/Pods-MasterMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3E8879A3D684DB2BC0E1A67 /* libPods-MasterMindTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MasterMindTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD014AD91FAD926A092A2EB /* Pods-MasterMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterMindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterMindTests/Pods-MasterMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,6 +184,7 @@
 				8A3CF95E19F58311000AAE35 /* Model */,
 				8A3CF95F19F58321000AAE35 /* View */,
 				8A3CF96019F5832F000AAE35 /* Controller */,
+				9A2DDC9C1A8E5955003410AC /* Protocol */,
 				8A19581919DAEEB300978CD8 /* Images.xcassets */,
 				8A19580C19DAEEB300978CD8 /* Supporting Files */,
 			);
@@ -178,6 +194,9 @@
 		8A19580C19DAEEB300978CD8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9AFF3A4D1A9646EB00E30D54 /* GTMCodeCoverageTestsXC.m */,
+				9AFF3A4A1A9646DA00E30D54 /* GTMCodeCoverageApp.h */,
+				9AFF3A4B1A9646DA00E30D54 /* GTMCodeCoverageApp.m */,
 				8A19580D19DAEEB300978CD8 /* Info.plist */,
 				8A19580E19DAEEB300978CD8 /* main.m */,
 			);
@@ -192,6 +211,7 @@
 				8A3CF95C19F582CF000AAE35 /* CellViewTest.m */,
 				8A9AD8D519F805D9003507DD /* ResultViewTest.m */,
 				8A9CB9D81A12B72D0063AE1F /* CombinationRowTest.m */,
+				9AB5F5821A89276400C575E1 /* ViewControllerTest.m */,
 			);
 			path = MasterMindTests;
 			sourceTree = "<group>";
@@ -204,6 +224,10 @@
 				8AE79D2419F693C700DD57CA /* testImageGreen.png */,
 				8AE79D2219F6754E00DD57CA /* testImageRed.png */,
 				8A19582719DAEEB300978CD8 /* Info.plist */,
+				9AA537E31A9B82C6007D9E0C /* NSString+Test.h */,
+				9AA537E41A9B82C6007D9E0C /* NSString+Test.m */,
+				9AA537E61A9CA33E007D9E0C /* NSArray+Test.h */,
+				9AA537E71A9CA33E007D9E0C /* NSArray+Test.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -239,6 +263,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		9A2DDC9C1A8E5955003410AC /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9A2DDC9D1A8E5980003410AC /* MMProtocols.h */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -251,6 +283,7 @@
 				8A19580619DAEEB300978CD8 /* Frameworks */,
 				8A19580719DAEEB300978CD8 /* Resources */,
 				6FE473B32A1AAE83ECB516BE /* Copy Pods Resources */,
+				9AFF3A511A9735A000E30D54 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -290,6 +323,7 @@
 				860faa1016bae988168aded2 /* Frameworks */,
 				81d6221ec98bb0a28422a31c /* Resources */,
 				e09d38978c9ee3e70f4ab75b /* Copy Pods Resources */,
+				9A23E9981AA078AB00B82FAF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -307,10 +341,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "Guillem Fern√°ndez Gonz√°lez";
+				ORGANIZATIONNAME = "Guillem Fern‚àö¬∞ndez Gonz‚àö¬∞lez";
 				TargetAttributes = {
 					8A19580819DAEEB300978CD8 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = DCPYH27J5D;
 					};
 					8A19582119DAEEB300978CD8 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -399,6 +434,32 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9A23E9981AA078AB00B82FAF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
+		9AFF3A511A9735A000E30D54 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
 		DCBC892F79E91C2434611F6B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A19581219DAEEB300978CD8 /* AppDelegate.m in Sources */,
+				9AFF3A501A9663A500E30D54 /* GTMCodeCoverageApp.m in Sources */,
 				8A19583419DAEF2000978CD8 /* MMViewController.m in Sources */,
 				8A9AD8D919F806D3003507DD /* MMResultCell.m in Sources */,
 				8A19580F19DAEEB300978CD8 /* main.m in Sources */,
@@ -496,10 +558,15 @@
 			files = (
 				8A3CF95D19F582CF000AAE35 /* CellViewTest.m in Sources */,
 				8A9AD8D619F805D9003507DD /* ResultViewTest.m in Sources */,
+				9AFF3A4E1A9646EB00E30D54 /* GTMCodeCoverageTestsXC.m in Sources */,
 				8A19583519DAEF2000978CD8 /* MMViewController.m in Sources */,
+				9AB5F5831A89276400C575E1 /* ViewControllerTest.m in Sources */,
+				9AA537E81A9CA33E007D9E0C /* NSArray+Test.m in Sources */,
 				8A19583B19DB27FF00978CD8 /* MMModel.m in Sources */,
 				8A9CB9D91A12B72D0063AE1F /* CombinationRowTest.m in Sources */,
+				9AA537E51A9B82C6007D9E0C /* NSString+Test.m in Sources */,
 				8A19583719DB244300978CD8 /* ModelTest.m in Sources */,
+				9AFF3A4C1A9646DA00E30D54 /* GTMCodeCoverageApp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +624,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -598,6 +667,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -616,9 +687,12 @@
 			baseConfigurationReference = 1FD237F227A2622FF2B5798C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MasterMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -627,9 +701,12 @@
 			baseConfigurationReference = 3FA576297292CFFFAB5104F2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MasterMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -642,6 +719,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -662,6 +741,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = MasterMindTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
